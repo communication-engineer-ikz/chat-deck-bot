@@ -2,6 +2,8 @@
 ## 話題一覧
 https://docs.google.com/spreadsheets/d/1xLXPSL5gPi9C1B8ZkThJdgrKFIbULdNEzxzWMFPGrYM/edit#gid=0
 
+自分用#memo。みなさんに権限は付与していません。
+
 ## 開発に必要なツール
 - LINE Developers
   - https://developers.line.biz/ja/
