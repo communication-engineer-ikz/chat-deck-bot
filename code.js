@@ -1,6 +1,8 @@
 const ACCESS_TOKEN = setAccessToken();
 const line_endpoint = 'https://api.line.me/v2/bot/message/reply';
 
+const msg_for_delete_history = "履歴削除します。 \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n 削除完了しました。";
+
 function doPost(e) {
   var json = JSON.parse(e.postData.contents);
 
@@ -72,6 +74,8 @@ function searchSheetName(message) {
     sheetName = "Pink Deck";
   } else if (message.search("今日のランチ") != -1) {
     sheetName = "Today's Lunch";
+  } else if (message.search("履歴削除") != -1) {
+    sheetName = "delete_history";
   } else {
     sheetName = "null";
   }
@@ -80,15 +84,17 @@ function searchSheetName(message) {
 }
 
 function getQuestion(sheetName) {
-  if (sheetName != "null") {
+  if (sheetName == "null") {
+    return "すみません。よくわかりません。";
+  } else if (sheetName == "delete_history") {
+    return msg_for_delete_history;
+  } else {
     var questionSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
     var questionListRange = questionSheet.getRange(1, 1, questionSheet.getLastRow() - 1, 1);
     var questionList = questionListRange.getValues();
     
     var index = Math.floor(Math.random() * questionList.length);
     var question = questionList[index][0];
-  } else {
-    return "すみません。よくわかりません。";
   }
   
   return question;
